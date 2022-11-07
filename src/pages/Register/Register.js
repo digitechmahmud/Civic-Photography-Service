@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthProvider';
 
 const Register = () => {
+    const { user, createUser, updateUserProfile } = useContext(AuthContext); 
+
     const handleRegisterForm = e => {
         e.preventDefault();
         const form = e.target;
@@ -9,6 +12,24 @@ const Register = () => {
         const photoURL = form.photoURL.value;
         const email = form.email.value;
         const password = form.password.value;
+
+        createUser(email, password)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                handleUpdateUserProfile(name, photoURL);
+            })
+            .catch(err => console.error(err)); 
+    }
+
+    const handleUpdateUserProfile = (name, photoURL) => {
+        const profile = {
+            displayName: name,
+            photoURL: photoURL
+        }
+        updateUserProfile(profile)
+            .then(() => {})
+            .catch (err => console.error(err)); 
     }
     return (
         <div className="hero">
@@ -44,7 +65,7 @@ const Register = () => {
                                 </label>
                                 <input type="password" name="password" placeholder="password" className="input input-bordered" required />
                                 <label className="label">
-                                    <Link to="#" className="label-text-alt link link-hover">Forgot password?</Link>
+                                    <p><small>Already have account?</small><small><Link to="/login">Login</Link></small></p>
                                 </label>
                             </div>
                             <div className="form-control mt-6">

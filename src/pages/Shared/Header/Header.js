@@ -1,13 +1,25 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../../context/AuthProvider';
 
 const Header = () => {
-
+    const { user, logOut } = useContext(AuthContext);
     const menuItems = <>
     
         <li><Link className='font-bold' to="/home">Home</Link></li>
         <li><Link className='font-bold' to="/services">Services</Link></li>
-        <li><Link className='font-bold' to="/login">Login</Link></li>
+        {
+            user?.uid ? 
+                <>
+                    <li><Link className='font-bold' onClick={logOut}>log out</Link></li>
+                    <p>{user.displayName}</p>
+                    <img width={40} height={40} className="rounded-full" src={user.photoURL} alt="" />              
+                </>
+                :
+                <li><Link className='font-bold' to="/login">Login</Link></li>
+        }
+       
+        
     </>
         
     
