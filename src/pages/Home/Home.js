@@ -1,3 +1,4 @@
+import { PhotoProvider, PhotoView } from 'react-photo-view';
 import { Link, useLoaderData } from 'react-router-dom';
 
 const Home = () => {
@@ -41,7 +42,11 @@ const Home = () => {
                 {
                     services.map(service => <div key={service._id}>
                         <div className="card card-compact w-96 bg-base-100   shadow-xl">
-                            <figure><img src="https://placeimg.com/400/225/arch" alt="Shoes" /></figure>
+                            <PhotoProvider>
+                                <PhotoView>
+                                    <figure><img src="https://placeimg.com/400/225/arch" alt="" /></figure>
+                                </PhotoView>
+                            </PhotoProvider>
                             <div className="card-body">
                                 <h2 className="card-title">{service.name}</h2>
                                 <div className='flex font-bold'>
