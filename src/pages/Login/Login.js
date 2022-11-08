@@ -1,10 +1,15 @@
 import React, { useContext } from 'react';
-import { Link, useLoaderData, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider';
+import { FcGoogle } from "react-icons/fc";
+import { GoogleAuthProvider } from 'firebase/auth';
+import useTitle from '../../Hooks/useTitle';
 
 const Login = () => {
-    const { user, signIn, loading } = useContext(AuthContext);
+    const { user, signIn, loading, signInGoogle } = useContext(AuthContext);
 
+    const googleProvider = new GoogleAuthProvider();
+    useTitle('Login')
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -27,8 +32,19 @@ const Login = () => {
                 navigate(from, { replace: true });
             })
             .catch(err => console.error(err));
-
     }
+
+    const handleGoogleSignIn = () => {
+        signInGoogle(googleProvider)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                navigate(from, { replace: true });
+                
+            })
+            .catch(err => console.error(err));
+    }
+
     return (
         <div className="hero">
             <div className="hero-content flex-col lg:flex-row-reverse">
@@ -57,6 +73,12 @@ const Login = () => {
                             </div>
                             <div className="form-control mt-6">
                                 <button className="btn btn-primary">Login</button>
+                            </div>
+                            <div>
+                                <h2>Or login using:</h2>
+                                <div className='flex justify-center'>
+                                    <Link onClick={handleGoogleSignIn} className='text-5xl mr-5'><FcGoogle /></Link>
+                                </div>
                             </div>
                         </form>
                     </div>
