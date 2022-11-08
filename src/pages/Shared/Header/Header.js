@@ -11,6 +11,7 @@ const Header = () => {
         {
             user?.uid ? 
                 <>
+                    <li><Link className='font-bold' to="/myreviews">My Reviews</Link></li>
                     <li><Link className='font-bold' onClick={logOut}>log out</Link></li>
                     <p>{user.displayName}</p>
                     <img width={40} height={40} className="rounded-full" src={user.photoURL} alt="" />              

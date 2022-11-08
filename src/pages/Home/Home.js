@@ -16,16 +16,19 @@ const Home = () => {
                                 <p>Price: ${service.price}</p>
                             </div>
                             <div>
-                                <p>{service.details.length > 150 ? <>{service.details.slice(0, 150) + '...'} <Link>Read More</Link></>
+                                <p>{service.details.length > 150 ? <>{service.details.slice(0, 150) + '...'} <Link to='/services'>Read More</Link></>
                                     : service.details}</p>
                             </div>
                             <div className="card-actions justify-end">
-                                <button className="btn btn-primary">Read More</button>
+                                <Link to='/services'><button className="btn btn-primary">Details</button></Link>
                             </div>
                         </div>
                     </div>
                 </div>)
             }
+            <div className='mx-auto'>
+                <Link to="/services"><button className='btn btn-ghost bg-amber-200'>See More</button></Link>
+            </div>
         </div>
     );
 };
