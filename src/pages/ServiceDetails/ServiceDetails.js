@@ -85,10 +85,10 @@ const ServiceDetails = () => {
 
                         </>
                         :
-                        <Link to="/login">Please Login</Link>
+                        <p>If you want to submit review <Link className='link text-blue-700 font-bold' to="/login">Please Login</Link></p>
                 }
             </div>
-            <div className='card w-2/3 shadow-xl mx-auto mb-10'>
+            <div className='card w-2/3 shadow-xl mx-auto mb-10 mt-5'>
                 <div className="card w-full shadow-xl">
                     <div className="card-body">
                         <img width={40} height={30} src={reviewsById.img} alt="" />

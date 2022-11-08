@@ -3,7 +3,11 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider';
 
 const Register = () => {
-    const { user, createUser, updateUserProfile } = useContext(AuthContext); 
+    const { user, createUser, updateUserProfile, loading } = useContext(AuthContext); 
+
+    if (loading) {
+        return <progress className="progress w-56"></progress>
+    }
 
     const handleRegisterForm = e => {
         e.preventDefault();

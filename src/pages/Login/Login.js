@@ -1,9 +1,18 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLoaderData, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider';
 
 const Login = () => {
-    const { user, signIn } = useContext(AuthContext);
+    const { user, signIn, loading } = useContext(AuthContext);
+
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    if (loading) {
+        return <progress className="progress w-56"></progress>
+    }
+
+    const from = location.state?.from?.pathname || '/';
 
     const handleLoginForm = e => {
         e.preventDefault();
@@ -15,6 +24,7 @@ const Login = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user);
+                navigate(from, { replace: true });
             })
             .catch(err => console.error(err));
 
