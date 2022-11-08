@@ -1,14 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider';
-import ReviewsCard from '../ReviewsCard/ReviewsCard';
+
 
 
 const ServiceDetails = () => {
     const [reviews, setReviews] = useState([]);
-    const { user } = useContext(AuthContext);
+    const [reviewsById, setReviewsById] = useState({});
+    const { user, loading } = useContext(AuthContext);
     const service = useLoaderData();
-    const { name, img, rating, price, details, _id } = service;
+    const { name, img, rating, price, details, _id,  } = service;
 
     const handleReview = e => {
         e.preventDefault();
@@ -38,14 +39,16 @@ const ServiceDetails = () => {
             })
     }
 
+
     useEffect(() => {
-        fetch('http://localhost:5000/reviews')
+        fetch(`http://localhost:5000/reviews/${_id}`)
             .then(res => res.json())
             .then(data => {
-                setReviews(data);
+                setReviewsById(data);
             })
             .catch(err => console.error(err));
-    }, [])
+    }, [_id]);
+    console.log(reviewsById);
     return (
         <div className=''>
             <div className="card w-2/3 shadow-xl mx-auto mb-10">
@@ -86,9 +89,13 @@ const ServiceDetails = () => {
                 }
             </div>
             <div className='card w-2/3 shadow-xl mx-auto mb-10'>
-                {
-                    reviews.map(review =><ReviewsCard key={review._id} review={review}></ReviewsCard>)
-                }
+                <div className="card w-full shadow-xl">
+                    <div className="card-body">
+                        <img width={40} height={30} src={reviewsById.img} alt="" />
+                        <h2 className="card-title">{reviewsById.customer}</h2>
+                        <p>{reviewsById.message}</p>
+                    </div>
+                </div>
             </div>
            
         </div>
