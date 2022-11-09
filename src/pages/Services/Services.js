@@ -1,12 +1,14 @@
 import React, { useContext } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider';
+import useTitle from '../../Hooks/useTitle';
 import ServiceCard from './ServiceCard';
 
 const Services = () => {
     const { user, loading } = useContext(AuthContext);
     const services = useLoaderData();
 
+    useTitle("Services");
     if (loading) {
         return <progress className="progress w-56"></progress>
     };

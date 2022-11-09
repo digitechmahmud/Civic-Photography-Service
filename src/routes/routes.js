@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import Main from "../Layouts/Main";
+import AddService from "../pages/AddService/AddService";
 import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
 import MyReviews from "../pages/MyReviews/MyReviews";
@@ -16,22 +17,22 @@ export const router = createBrowserRouter([
             {
                 path: '/',
                 element: <Home></Home>,
-                loader: () => fetch('http://localhost:5000/')
+                loader: () => fetch('https://civic-photography-server.vercel.app/')
             },
             {
                 path: '/home',
                 element: <Home></Home>,
-                loader: () => fetch('http://localhost:5000/')
+                loader: () => fetch('https://civic-photography-server.vercel.app/')
             },
             {
                 path: '/services',
                 element: <Services></Services>,
-                loader: () => fetch('http://localhost:5000/services')
+                loader: () => fetch('https://civic-photography-server.vercel.app/services')
             },
             {
                 path: '/services/:id',
                 element: <ServiceDetails></ServiceDetails>,
-                loader: ({ params }) => fetch(`http://localhost:5000/services/${params.id}`)
+                loader: ({ params }) => fetch(`https://civic-photography-server.vercel.app/services/${params.id}`)
             },
             {
                 path: '/login',
@@ -44,7 +45,11 @@ export const router = createBrowserRouter([
             {
                 path: '/myreviews',
                 element: <PrivateRoute><MyReviews></MyReviews></PrivateRoute>
-            }
+            },
+            {
+                path: '/addservice',
+                element: <PrivateRoute><AddService></AddService></PrivateRoute>
+            },
         ]
     }
 ])

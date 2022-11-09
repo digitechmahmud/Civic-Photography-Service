@@ -12,9 +12,12 @@ const Header = () => {
             user?.uid ? 
                 <>
                     <li><Link className='font-bold' to="/myreviews">My Reviews</Link></li>
+                    <li><Link className='font-bold' to="/addservice">Add Service</Link></li>
                     <li><Link className='font-bold' onClick={logOut}>log out</Link></li>
-                    <p>{user.displayName}</p>
-                    <img width={40} height={40} className="rounded-full" src={user.photoURL} alt="" />              
+                    <div className="tooltip tooltip-right" data-tip={user.displayName}>
+                        <img width={40} height={40} className="rounded-full" src={user.photoURL} alt="" />  
+                    </div>
+                                
                 </>
                 :
                 <li><Link className='font-bold' to="/login">Login</Link></li>

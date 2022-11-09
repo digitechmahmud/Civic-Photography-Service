@@ -1,9 +1,11 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider';
+import useTitle from '../../Hooks/useTitle'
 
 const Register = () => {
     const { user, createUser, updateUserProfile, loading } = useContext(AuthContext); 
+    useTitle('Register')
 
     if (loading) {
         return <progress className="progress w-56"></progress>

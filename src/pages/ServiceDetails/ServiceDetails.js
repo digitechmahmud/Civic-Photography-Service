@@ -25,7 +25,7 @@ const ServiceDetails = () => {
             rating,
             message,
         }
-        fetch('http://localhost:5000/reviews', {
+        fetch('https://civic-photography-server.vercel.app/reviews', {
             method: "POST",
             headers: {
                 "content-type": "application/json"
@@ -41,7 +41,7 @@ const ServiceDetails = () => {
 
 
     useEffect(() => {
-        fetch(`http://localhost:5000/reviews/${_id}`)
+        fetch(`https://civic-photography-server.vercel.app/reviews/${_id}`)
             .then(res => res.json())
             .then(data => {
                 setReviewsById(data);
