@@ -11,11 +11,11 @@
 
 ## Feature & Functionality ##
 
-# It's a Photography service related website.
-# All data serve from node express js server dynamically.
-# Use MongoDB for store data and retrieve data.
-# Using firebase authentication system. 
-# And use react router and private route also. 
+Markup : * It's a Photography service related website.
+         * All data serve from node express js server dynamically.
+         * Use MongoDB for store data and retrieve data.
+         * Using firebase authentication system. 
+         * And use react router and private route also. 
 
 
 
