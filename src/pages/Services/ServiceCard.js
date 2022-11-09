@@ -9,11 +9,11 @@ const ServiceCard = ({ service }) => {
     const { name, price, rating, details, _id, img } = service;
     return (
         <div>
-            <div className="card w-96 bg-base-100 shadow-xl">
+            <div className="card w-96 bg-base-100 shadow-xl hover:border-2 hover:border-slate-500">
                 <figure className="px-10 pt-10">
                     <PhotoProvider>
                         <PhotoView src={img}>
-                            <img src={img} alt="" className="rounded-xl w-2/3" />
+                            <img src={img} alt="" className="rounded-xl" />
                         </PhotoView>
                     </PhotoProvider>
                 </figure>

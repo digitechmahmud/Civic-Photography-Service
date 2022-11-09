@@ -52,7 +52,7 @@ const ServiceDetails = () => {
     return (
         <div className=''>
             <div className="card w-2/3 shadow-xl mx-auto mb-10">
-                <figure><img src="https://placeimg.com/400/225/arch" alt="Shoes" /></figure>
+                <figure><img src={img} alt="Shoes" /></figure>
                 <div className="card-body">
                     <h2 className="card-title">Service Name: {name}</h2>
                     <p>Public Rating: {rating}</p>
