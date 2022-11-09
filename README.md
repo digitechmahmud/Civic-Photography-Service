@@ -1,3 +1,27 @@
+
+### Website Name: Civic Photography
+### Website live link: https://civic-photography.web.app
+
+## Technology used ##
+
+# React JavaScript library 
+# Firebase
+# Tailwind CSS framework
+# Daisy UI 
+
+## Feature & Functionality ##
+
+ Markup : * It's a Photography service related website.
+ Markup : * All data serve from node express js server dynamically.
+ Markup : * Use MongoDB for store data and retrieve data.
+ Markup : * Using firebase authentication system. 
+ Markup : * And use react router and private route also. 
+
+
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
