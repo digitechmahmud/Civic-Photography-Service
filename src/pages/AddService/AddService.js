@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../../context/AuthProvider';
+import toast, { Toaster } from 'react-hot-toast';
 
 const AddService = () => {
     const { user } = useContext(AuthContext);
@@ -7,22 +8,22 @@ const AddService = () => {
     const handleAddService = (e) => {
         e.preventDefault();
         const form = e.target;
-        const serviceName = form.serviceName.value;
+        const name = form.name.value;
         const price = form.price.value;
         const rating = form.rating.value;
-        const servicePhotoURL = form.servicePhotoURL.value;
+        const img = form.img.value;
         const details = form.details.value;
 
         const service = {
             email: user.email,
-            name: serviceName,
+            name: name,
             price: price,
             rating: rating,
-            img: servicePhotoURL,
+            img: img,
             details: details
         }
 
-        fetch('http://localhost:5000/services', {
+        fetch('https://civic-photography-server.vercel.app/services', {
             method: "POST",
             headers: {
                 "content-type": "application/json"
@@ -32,7 +33,7 @@ const AddService = () => {
             .then(res => res.json())
             .then(data => {
                 console.log(data);
-                alert('Service Successfully Added');
+                toast('Service Successfully Added');
             })
 
     }
@@ -43,7 +44,7 @@ const AddService = () => {
                     <label className="label">
                         <span className="label-text">Service Name</span>
                     </label>
-                    <input type="text" name="serviceName" placeholder="Your name" className="input input-bordered" required />
+                    <input type="text" name="name" placeholder="Your name" className="input input-bordered" required />
                 </div>
                 <div className="form-control">
                     <label className="label">
@@ -61,13 +62,14 @@ const AddService = () => {
                     <label className="label">
                         <span className="label-text">Service Photo</span>
                     </label>
-                    <input type="text" name="servicePhotoURL" placeholder="Service Photo" className="input input-bordered" required />
+                    <input type="text" name="img" placeholder="Service Photo" className="input input-bordered" required />
                 </div>
                 <textarea className="textarea textarea-primary textarea-bordered h-24 w-full" name="details" placeholder="Service Details" required></textarea>
                 <div className="form-control mt-6">
                     <button className="btn btn-primary">Add Service</button>
                 </div>
             </form>
+            <Toaster/>
         </div>
         
     );

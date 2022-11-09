@@ -44,8 +44,8 @@ const Home = () => {
                     services.map(service => <div key={service._id}>
                         <div className="card card-compact w-96 bg-base-100   shadow-xl">
                             <PhotoProvider>
-                                <PhotoView>
-                                    <figure><img src="https://placeimg.com/400/225/arch" alt="" /></figure>
+                                <PhotoView src={service.img}>
+                                    <figure><img src={service.img} alt="" /></figure>
                                 </PhotoView>
                             </PhotoProvider>
                             <div className="card-body">
