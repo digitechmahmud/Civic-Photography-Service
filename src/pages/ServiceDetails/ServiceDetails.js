@@ -6,10 +6,10 @@ import { AuthContext } from '../../context/AuthProvider';
 
 const ServiceDetails = () => {
     const [reviews, setReviews] = useState([]);
-    const [reviewsById, setReviewsById] = useState({});
+    const [reviewsById, setReviewsById] = useState([]);
     const { user, loading } = useContext(AuthContext);
     const service = useLoaderData();
-    const { name, img, rating, price, details, _id,  } = service;
+    const { name, img, rating, price, details, _id, id } = service;
 
     const handleReview = e => {
         e.preventDefault();
@@ -24,6 +24,7 @@ const ServiceDetails = () => {
             id: _id,
             rating,
             message,
+            date: new Date()
         }
         fetch('https://civic-photography-server.vercel.app/reviews', {
             method: "POST",
@@ -41,13 +42,13 @@ const ServiceDetails = () => {
 
 
     useEffect(() => {
-        fetch(`https://civic-photography-server.vercel.app/reviews/${_id}`)
+        fetch(`https://civic-photography-server.vercel.app/reviews/${service._id}`)
             .then(res => res.json())
             .then(data => {
                 setReviewsById(data);
             })
             .catch(err => console.error(err));
-    }, [_id]);
+    }, [service._id]);
     console.log(reviewsById);
     return (
         <div className=''>
@@ -88,14 +89,18 @@ const ServiceDetails = () => {
                         <p>If you want to submit review <Link className='link text-blue-700 font-bold' to="/login">Please Login</Link></p>
                 }
             </div>
-            <div className='card w-2/3 shadow-xl mx-auto mb-10 mt-5'>
-                <div className="card w-full shadow-xl">
-                    <div className="card-body">
-                        <img width={40} height={30} src={reviewsById.img} alt="" />
-                        <h2 className="card-title">{reviewsById.customer}</h2>
-                        <p>{reviewsById.message}</p>
-                    </div>
-                </div>
+            <div>
+                {
+                    reviewsById.map(rv => <div className='card w-2/3 shadow-xl mx-auto mb-10 mt-5'>
+                        <div className="card w-full shadow-xl">
+                            <div className="card-body">
+                                <img width={40} height={30} src={rv.img} alt="" />
+                                <h2 className="card-title">{rv.customer}</h2>
+                                <p>{rv.message}</p>
+                            </div>
+                        </div>
+                    </div>)
+                }
             </div>
            
         </div>

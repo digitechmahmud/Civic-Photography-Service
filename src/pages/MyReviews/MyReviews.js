@@ -1,13 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../context/AuthProvider';
 import toast, { Toaster } from 'react-hot-toast';
+import useTitle from '../../Hooks/useTitle';
+import { Link } from 'react-router-dom';
 
 
 const MyReviews = () => {
     const [myReviews, setMyReviews] = useState([]);
     const { user, loading } = useContext(AuthContext);
 
-    
+    useTitle("My Review")
 
     useEffect(() => {
         fetch(`https://civic-photography-server.vercel.app/reviews?email=${user?.email}`)
@@ -50,7 +52,7 @@ const MyReviews = () => {
                             <p>{mr.message}</p>
                             <div className='flex'>
                                 <button onClick={() => handleDelete(mr._id)} className='mr-2 btn btn-sm'>Delete</button>
-                                <button className='btn btn-sm'>Edit</button>
+                                <Link to={`/update/${mr._id}`}><button className='btn btn-sm'>Edit</button></Link>
                             </div>
                         </div>
                     </div>)

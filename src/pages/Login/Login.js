@@ -28,8 +28,25 @@ const Login = () => {
         signIn(email, password)
             .then(result => {
                 const user = result.user;
-                console.log(user);
-                navigate(from, { replace: true });
+                const currentUser = {
+                    email: user.email
+                }
+                fetch('https://civic-photography-server.vercel.app/jwt', {
+                    method: "POST",
+                    headers: {
+                        "content-type": "application/json"
+                    },
+                    body: JSON.stringify(currentUser)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data);
+                        localStorage.setItem("civic-photography", data.token)
+                        navigate(from, { replace: true });
+                        form.reset();
+                    })
+                    .catch(error => console.log(error));
+               
             })
             .catch(err => console.error(err));
     }
@@ -38,20 +55,33 @@ const Login = () => {
         signInGoogle(googleProvider)
             .then(result => {
                 const user = result.user;
-                console.log(user);
-                navigate(from, { replace: true });
-                
+                const currentUser = {
+                    email: user.email
+                }
+                fetch('https://civic-photography-server.vercel.app/jwt', {
+                    method: "POST",
+                    headers: {
+                        "content-type": "application/json"
+                    },
+                    body: JSON.stringify(currentUser)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data);
+                        localStorage.setItem("civic-photography", data.token)
+                        navigate(from, { replace: true });
+                        
+                    })
+                    .catch(error => console.log(error));
+
             })
             .catch(err => console.error(err));
     }
 
     return (
         <div className="hero">
-            <div className="hero-content flex-col lg:flex-row-reverse">
-                <div className="text-center lg:text-left">
-                    <h1 className="text-5xl font-bold">Login now!</h1>
-                    <p className="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
-                </div>
+            <div className="hero-content flex-col lg:flex-row">
+                
                 <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
                     <div className="card-body">
                         <form onSubmit={handleLoginForm}>
