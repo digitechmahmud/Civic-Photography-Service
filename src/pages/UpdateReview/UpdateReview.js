@@ -3,15 +3,16 @@ import { useLoaderData } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
 
 const UpdateReview = () => {
-    const storedReview = useLoaderData();
-    const [review, setReview] = useState(storedReview);
+    const reviewData = useLoaderData();
+    console.log(reviewData);
+    const [review, setReview] = useState(reviewData);
 
     console.log(review);
 
     const handleUpdateReview = (e) => {
         e.preventDefault();
-        fetch(`https://civic-photography-server.vercel.app/reviews/${storedReview.id}`, {
-            method: "PUT",
+        fetch(`https://civic-photography-server.vercel.app/reviews/${reviewData.id}`, {
+            method: "PATCH",
             headers: {
                 "content-type": "application/json"
             },
@@ -39,7 +40,7 @@ const UpdateReview = () => {
     return (
         <div>
             <form onSubmit={handleUpdateReview}>
-                <input onChange={handleInputChange} defaultValue={storedReview.message} type="text" name="message" placeholder='Message' required />
+                <input onChange={handleInputChange} defaultValue={review.message} type="text" name="message" placeholder='Message' required />
                 <button type="submit">Update</button>
             </form>
             <Toaster />
