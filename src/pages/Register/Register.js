@@ -23,6 +23,7 @@ const Register = () => {
         createUser(email, password)
             .then(result => {
                 const user = result.user;
+                toast.success('Successfullly Registered');
                 console.log(user);
                 handleUpdateUserProfile(name, photoURL);
             })
