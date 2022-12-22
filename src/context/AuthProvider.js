@@ -43,6 +43,7 @@ const AuthProvider = ({ children }) => {
         return updateProfile(auth.currentUser, profile);
     }
 
+
     const authInfo = {
         user,
         createUser,
