@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { toast } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider';
 import useTitle from '../../Hooks/useTitle'
@@ -25,7 +26,7 @@ const Register = () => {
                 console.log(user);
                 handleUpdateUserProfile(name, photoURL);
             })
-            .catch(err => console.error(err)); 
+            .catch(err => toast.error(err.message)); 
     }
 
     const handleUpdateUserProfile = (name, photoURL) => {
